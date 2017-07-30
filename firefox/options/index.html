@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+
+  <body>
+    <form>
+      <label for="max-articles">Max Number of Articles (0 for Unlimited): </label>
+      <input id="max-articles" type="number" value="0" />
+
+      <p>Time Limit (0 for Unlimited)</p>
+      <p>
+        <input id="time-value" type="number" value="0" />
+        <select id="time-unit">
+          <option id="minutes" value="minutes">minutes</option>
+          <option id="hours" value="hours">hours</option>
+        </select>
+        per
+        <input id="per-time-value" type="number" value="0" />
+        <select id="per-time-unit">
+          <option id="per-hour" value="hours">hours</option>
+          <option id="per-day" value="days">days</option>
+        </select>
+      </p>
+
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>
