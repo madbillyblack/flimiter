@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Flimiter",
+  "version": "0.1",
+  "homepage_url": "https://github.com/madbillyblack/flimiter",
+  "description": "Create self-imposed limits on your social media consumption.",
+  "icons": {
+    "48": "icons/flimiter-48.png",
+    "96": "icons/flimiter-96.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": "icons/flimiter-32.png",
+    "default_title": "Flimiter"
+  },
+  "web_accessible_resources": [
+    "img/hamster-booty.gif"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["flimiter.js"]
+    }
+  ]
+}
