@@ -1,4 +1,5 @@
 /*******************************************************************************
+ * Options javascript for Flimiter add-on.                                     *
  * Currently supported social media types:                                     *
  *                                                                             *
  *   * Facebook                                                                *
@@ -16,6 +17,9 @@ function handleDefaultError(e) {
  * Save settings to local storage.
  */
 function saveSettings() {
+  // Get the settings for the requested social media type.
+  // Available `smType` options:
+  //   * facebook
   function getSettingsFor(smType) {
     const maxPosts = document.querySelector("#" + smType + "-max-posts");
     const timeValue = document.querySelector("#" + smType + "-time-value");
@@ -44,6 +48,9 @@ saveButton.addEventListener("click", saveSettings);
  * Restore saved settings to the options UI
  */
 function restoreSettings(settings) {
+  // Restore the settings for the requested section of the options panel.
+  // Available `smType` options:
+  //   * facebook
   function restoreFor(smType) {
     const smSetting = settings[smType];
 

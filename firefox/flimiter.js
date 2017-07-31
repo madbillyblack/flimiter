@@ -1,54 +1,66 @@
-// browser.extension.getURL("img/hamster-booty.gif")
-// browser.tabs.executeScript(null, {
-//      file: "/content_scripts/flimiter.js"
-//    });
-/*
-var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
-    gettingActiveTab.then((tabs) => {
-      browser.tabs.sendMessage(tabs[0].id, {beastURL: chosenBeastURL});
-    });
+/*******************************************************************************
+ *                                                                             *
+ * Main javascript for Flimiter. Runs when on a supported social media page.   *
+ *                                                                             *
+ *******************************************************************************/
+
+// If there is nothing in storage, use these settings.
+/*var defaultSettings = {
+  facebook: {}
+}
 */
-/*
-beastify():
-* removes every node in the document.body,
-* then inserts the chosen beast
-* then removes itself as a listener
-*/
-/*function beastify(request, sender, sendResponse) {
-  removeEverything();
-  insertBeast(request.beastURL);
-  browser.runtime.onMessage.removeListener(beastify);
+/**
+ * Default error handling (logs to console)
+ */
+/*function handleDefaultError(e) {
+  console.log(e);
 }
 */
 
-/*
-Remove every node under document.body
-*/
-/*
-function removeEverything() {
-  while (document.body.firstChild) {
-    document.body.firstChild.remove();
+/**
+ * Figure out which social media site this is, in order to find settings.
+ */
+function getSocialMediaType() {
+  const url = window.content.location.href;
+
+  // TODO: check for facebook
+  if ( true ) {
+    return "facebook";
   }
 }
-*/
 
-/*
-Given a URL to a beast image, create and style an IMG node pointing to
-that image, then insert the node into the document.
-*/
-/*
-function insertBeast(beastURL) {
-  var beastImage = document.createElement("img");
-  beastImage.setAttribute("src", beastURL);
-  beastImage.setAttribute("style", "width: 100vw");
-  beastImage.setAttribute("style", "height: 100vh");
-  document.body.appendChild(beastImage);
+//const smType = getSocialMediaType();
+//var flimiterSettings;
+
+/**
+ * Set the main settings for Flimiter and obscure content according to settings.
+ */
+/*function init(settings) {
+  if (!settings.facebook) {
+    browser.storage.local.set(defaultSettings);
+    settings = defaultSettings;
+  }
+
+  // TODO: when I have the smType, use it to set the settings
+  flimiterSettings = settings;
+  if (typeof(flimiterSettings) !== "undefined") {
+    console.log(flimiterSettings);
+  }
 }
-*/
-/*
-Assign beastify() as a listener for messages from the extension.
-*/
-//browser.runtime.onMessage.addListener(beastify);
 
-/*
-window.addEventListener("load", function(e) {});
+//const storedSettings = browser.storage.local.get();
+//storedSettings.then(init, handleDefaultError);
+
+/**
+ * Updates the page with the appropriate hamster blockers.
+ */
+function hamsterfy() {
+  // TODO: deal with no settings set for page
+  // TODO: deal with settings not loaded
+  console.log('FLIMITER: hamsterfy');
+}
+
+window.addEventListener("load", hamsterfy);
+
+// TODO: handle scroll event
+
