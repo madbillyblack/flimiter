@@ -4,18 +4,20 @@
  *                                                                             *
  *******************************************************************************/
 
-// If there is nothing in storage, use these settings.
-/*var defaultSettings = {
+/**
+ * Default browser settings, if none found
+ */
+var defaultSettings = {
   facebook: {}
 }
-*/
+
 /**
  * Default error handling (logs to console)
  */
-/*function handleDefaultError(e) {
+function handleDefaultError(e) {
   console.log(e);
 }
-*/
+
 
 /**
  * Figure out which social media site this is, in order to find settings.
@@ -29,38 +31,30 @@ function getSocialMediaType() {
   }
 }
 
-//const smType = getSocialMediaType();
-//var flimiterSettings;
+const smType = getSocialMediaType();
 
 /**
- * Set the main settings for Flimiter and obscure content according to settings.
+ * Updates the page with hamster blockers, according to settings
  */
-/*function init(settings) {
-  if (!settings.facebook) {
-    browser.storage.local.set(defaultSettings);
-    settings = defaultSettings;
+function hamsterfy(settings) {
+  const flimiterType = settings[smType];
+
+  if (typeof(flimiterType) !== "undefined") {
+
   }
 
-  // TODO: when I have the smType, use it to set the settings
-  flimiterSettings = settings;
-  if (typeof(flimiterSettings) !== "undefined") {
-    console.log(flimiterSettings);
-  }
-}
-
-//const storedSettings = browser.storage.local.get();
-//storedSettings.then(init, handleDefaultError);
-
-/**
- * Updates the page with the appropriate hamster blockers.
- */
-function hamsterfy() {
   // TODO: deal with no settings set for page
   // TODO: deal with settings not loaded
   console.log('FLIMITER: hamsterfy');
 }
 
-window.addEventListener("load", hamsterfy);
+/**
+ * Initialize flimiter settings for page and initialize page.
+ * This should be called every time the page updates
+ */
+function updatePage() {
+  const storedSettings = browser.storage.local.get();
+  storedSettings.then(hamsterfy, handleDefaultError);
+}
 
-// TODO: handle scroll event
-
+updatePage();
