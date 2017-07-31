@@ -4,11 +4,16 @@
  *                                                                             *
  *******************************************************************************/
 
+// Where the hamster picture lives
+const hampsterPic = browser.extension.getURL("img/hamster-booty.gif");
+
 /**
- * Default browser settings, if none found
+ * Social media data constants used by Flimiter
  */
-var defaultSettings = {
-  facebook: {}
+const smConstants = {
+  facebook: {
+    contentDivs: [".fbUserContent"]
+  }
 }
 
 /**
@@ -25,8 +30,7 @@ function handleDefaultError(e) {
 function getSocialMediaType() {
   const url = window.content.location.href;
 
-  // TODO: check for facebook
-  if ( true ) {
+  if ( url.match(/*facebook.com*/) ) {
     return "facebook";
   }
 }
@@ -36,11 +40,54 @@ const smType = getSocialMediaType();
 /**
  * Updates the page with hamster blockers, according to settings
  */
-function hamsterfy(settings) {
-  const flimiterType = settings[smType];
+function limitContent(settings) {
+  // Generates a hampster div
+  function hampsterify(div) {
+    var hampster = document.createElement("img");
+    hampster.setAttribute("src", hampsterPic);
+  }
+
+
+  const flimiterSettings = settings[smType];
+  const flimiterConsts = smConstants[smType];
+  const maxPosts = flimiterSettings.maxPosts;
+  // TODO: handle time-based settings
+
+  let contentDivs = [];
+  for (let selector of flimiterConsts.contentDivs || []) {
+    let divs = document.querySelectorAll(selector);
+    for (let div of divs) {
+      contentDivs.push(div);
+    }
+  }
+
+  // This isn't enabled. We can skip.
+  if (typeof(maxPosts) === "undefined") {
+    return;
+  }
+  else if (maxPosts > 0) {
+    contentDivs.forEach(function(div, i, array) {
+      if (i > maxPosts) {
+
+      }
+    });
+  }
+
+  // Sanity check
+  if (typeof(flimiterType) === "undefined") { return; }
+
+
+
+  // Get content divs that may need to be replaced
+  function contentSelectors() {
+
+  }
+
+
+  const selectors =
 
   if (typeof(flimiterType) !== "undefined") {
-
+    const
   }
 
   // TODO: deal with no settings set for page
@@ -54,7 +101,7 @@ function hamsterfy(settings) {
  */
 function updatePage() {
   const storedSettings = browser.storage.local.get();
-  storedSettings.then(hamsterfy, handleDefaultError);
+  storedSettings.then(limitContent, handleDefaultError);
 }
 
 updatePage();
